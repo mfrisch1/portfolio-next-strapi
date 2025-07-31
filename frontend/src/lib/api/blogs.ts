@@ -1,29 +1,41 @@
 import { STRAPI_URL } from "@/lib/strapi"
 import { Blog, BlogCard } from "@/types/blog"
-import { StrapiListResponse } from "@/types/common"
+import { StrapiResponse, StrapiSingleResponse } from "@/types/common"
 import qs from "qs"
 
 const query = qs.stringify({
+	sort: ["publishedAt:desc"],
 	fields: ["title", "description", "slug", "documentId", "publishedAt"],
 	populate: {
 		cover: {
 			fields: ["url"]
-		}
+		},
+		tags: {
+			fields: ["name"]
+		},
+	}}, {
+	encodeValuesOnly: true,
 	}
-})
+)
 
-export async function getBlogs(): Promise<StrapiListResponse<BlogCard>> {
+export async function getBlogs(): Promise<StrapiResponse<BlogCard>> {
 	const res = await fetch(`${STRAPI_URL}/api/blogs?${query}`);
+	if (!res.ok) {
+		throw new Error(`Failed to fetch blogs: ${res.status}`)
+	}
 	return res.json();
 }
 
-export async function getBlogBySlug(slug: string): Promise<StrapiListResponse<Blog>> {
+export async function getBlogBySlug(slug: string): Promise<StrapiResponse<Blog>> {
 	const res = await fetch(`${STRAPI_URL}/api/blogs/?filters[slug][$eq]=${slug}`);
+	if (!res.ok) {
+		throw new Error(`Failed to fetch: ${res.status} with ${slug}`)
+	}
 	return res.json();
 } 
 
-export async function getBlogById(docId: string): Promise<Blog> {
-	const res = await fetch(`${STRAPI_URL}/api/blogs/${docId}`);
+export async function getBlogById(docId: string): Promise<StrapiSingleResponse<Blog>> {
+	const res = await fetch(`${STRAPI_URL}/api/blogs/${docId}?populate=*`);
 	if (!res.ok) {
 		throw new Error(`Failed to fetch: ${res.status} with ${docId}`);
 	}

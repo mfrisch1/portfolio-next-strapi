@@ -41,3 +41,6 @@ run-strapi:
 delete:
 	read -p "Enter pm2 pid to remove: " PID; \
 	pm2 delete $$PID;elete:
+
+delete-all:
+	pm2 delete all

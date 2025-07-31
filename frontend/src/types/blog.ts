@@ -1,4 +1,5 @@
-import type { Media } from "./media";
+import type { Media, MediaAttributes } from "./media";
+import type { Tag, StrapiResponse, StrapiSingleResponse } from "./common"
 
 export interface Blog {
 	id: number;
@@ -8,10 +9,11 @@ export interface Blog {
 	description: string | null;
   slug: string;
   content: string;
-  cover: Media;
+  cover: MediaAttributes
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+	tags?: StrapiResponse<Tag>;
 }
 
 export interface BlogCard {
@@ -21,7 +23,14 @@ export interface BlogCard {
 	description: string | null;
   slug: string;
   cover: {
+		id: number
+		documentId: string;
 		url: string;
 	};
+	tags: {
+		id: number;
+		documentId: string;
+		name: string;
+	}
   publishedAt: string;
 }

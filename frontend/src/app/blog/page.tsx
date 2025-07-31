@@ -1,12 +1,12 @@
 import { BlogCard } from "@/types/blog"
 import { getBlogs } from "@/lib/api/blogs"
-import { StrapiListResponse } from "@/types/common"
+import { StrapiResponse } from "@/types/common"
 import Card from "@/components/Card"
 import { notFound } from "next/navigation"
 import { STRAPI_URL } from "@/lib/strapi"
 
 export default async function BlogList() {
-	const data: StrapiListResponse<BlogCard> = await getBlogs();
+	const data: StrapiResponse<BlogCard> = await getBlogs();
 
 	if (!data) notFound();
 
@@ -21,6 +21,7 @@ export default async function BlogList() {
 					slug={`/${blog.slug}-${blog.documentId}`}
 					description={blog.description || "No Description Provided"}
 					coverURL={`${STRAPI_URL}${blog.cover.url}`}
+					tags={blog.tags}
 				/>
 			))}
 		</div>
