@@ -32,7 +32,7 @@ export default function RootLayout({
       >
 				<Providers>
 					<NavBar />
-					<div className="mx-auto mt-15 w-full px-4 sm:px-6 lg:px-8 max-w-screen-md" >
+					<div className="mx-auto mt-15 w-full px-4 sm:px-6 lg:px-8 max-w-screen-lg" >
 						{children}
 					</div>
 				</Providers>

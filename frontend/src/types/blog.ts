@@ -1,5 +1,5 @@
-import type { Media, MediaAttributes } from "./media";
-import type { Tag, StrapiResponse, StrapiSingleResponse } from "./common"
+import type { MediaAttributes } from "./media";
+import type { Tag, StrapiResponse } from "./common"
 
 export interface Blog {
 	id: number;

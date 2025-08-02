@@ -3,9 +3,12 @@ import Image from "next/image"
 import type { Tag } from "@/types/common";
 
 interface CardProps {
-	title: string; description: string; coverURL: string | undefined;
+	title: string; 
+	description: string; 
+	coverURL: string | undefined;
 	slug: string;
 	tags: Tag | Tag[] | null | undefined;
+	type: 'blog'| 'projects';
 }
 const tagColors = [
   'bg-red-500',
@@ -23,7 +26,7 @@ function getColorClass(tagName: string): string {
   return tagColors[hash % tagColors.length];
 }
 
-export default function Card({ title, coverURL, description, slug, tags }: CardProps) {
+export default function Card({ title, coverURL, description, slug, tags, type }: CardProps) {
 	const safeTags = !tags
   ? []
   : Array.isArray(tags)
@@ -31,7 +34,7 @@ export default function Card({ title, coverURL, description, slug, tags }: CardP
   : [tags];
 
 	return (
-		<Link href={`/blog/${slug}`} className="card w-full shadow-sm m-4">
+		<Link href={`/${type}/${slug}`} className="card w-full shadow-sm m-4">
 			<figure className="w-full h-48 overflow-hidden">
 				<Image 
 					width={400}

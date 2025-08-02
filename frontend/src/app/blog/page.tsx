@@ -13,7 +13,7 @@ export default async function BlogList() {
 	const blogs: BlogCard[] = data.data;
 
 	return (
-		<div className="max-w-md mx-auto grid grid-cols-1 md:max-w-none md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+		<div className="max-w-md mx-auto grid grid-cols-1 md:max-w-none md:grid-cols-2 lg:grid-cols-2 gap-6 p-4">
 			{blogs.map(blog=> (
 				<Card
 					key={blog.id}
@@ -22,6 +22,7 @@ export default async function BlogList() {
 					description={blog.description || "No Description Provided"}
 					coverURL={`${STRAPI_URL}${blog.cover.url}`}
 					tags={blog.tags}
+					type={'blog'}
 				/>
 			))}
 		</div>
