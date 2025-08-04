@@ -13,7 +13,7 @@ export default async function ProjectList() {
 	const projects: ProjectCard[] = data.data;
 
 	return (
-		<div className="max-w-md mx-auto grid grid-cols-1 md:max-w-none md:grid-cols-2 lg:grid-cols-3 gap-8 p-4">
+		<div className="max-w-md mx-auto grid grid-cols-1 md:max-w-none md:grid-cols-2 lg:grid-cols-2 gap-6 p-4">
 			{projects.map(project=> (
 				<Card
 					key={project.id}

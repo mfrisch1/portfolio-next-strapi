@@ -16,9 +16,13 @@ export default function NavBar() {
 				<Link className="btn btn-ghost text-base width-auto" href="/projects">
 					Projects
 				</Link>
-				<Link className="btn btn-ghost rounded-r-xl text-base width-auto" href="/projects">
+				{/* <Link className="btn btn-ghost rounded-r-xl text-base width-auto" href="/projects"> */}
+				{/* 	Profile */}
+				{/* </Link> */}
+				{/* The button to open modal */}
+				<label htmlFor="my_modal_7" className="btn btn-ghost rounded-r-xl text-base width-auto">
 					Profile
-				</Link>
+				</label>
 			</div>
 			<div className="navbar-end mr-5">
 				<ThemeButton />
