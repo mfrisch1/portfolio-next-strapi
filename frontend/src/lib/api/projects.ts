@@ -3,9 +3,14 @@ import { Project, ProjectCard } from "@/types/project"
 import { StrapiResponse, StrapiSingleResponse } from "@/types/common"
 import qs from "qs"
 
-const query = qs.stringify({
+export async function getProjects(page:number, pageSize: number): Promise<StrapiResponse<ProjectCard>> {
+	const query = qs.stringify({
 	sort: ["publishedAt:desc"],
 	fields: ["title", "description", "slug", "documentId", "publishedAt"],
+	pagination: {
+			page,
+			pageSize,
+	},
 	populate: {
 		cover: {
 			fields: ["url"]
@@ -15,10 +20,7 @@ const query = qs.stringify({
 		},
 	}}, {
 	encodeValuesOnly: true,
-	}
-)
-
-export async function getProjects(): Promise<StrapiResponse<ProjectCard>> {
+	})
 	const res = await fetch(`${STRAPI_URL}/api/projects?${query}`);
 	if (!res.ok) {
 		throw new Error(`Failed to fetch blogs: ${res.status}`)

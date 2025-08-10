@@ -1,9 +1,36 @@
-import Link from "next/link"
-import ThemeButton from "@/components/ThemeButton"
+'use client';
+import Link from "next/link";
+import ThemeButton from "@/components/ThemeButton";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
+	// Navbar on Scroll
+	const [show, setShow] = useState(true);
+	const [lastScrollY, setLastScrollY] = useState(0);
+
+	useEffect(()=>{
+		const controlNavbar = () => {
+			const currentScrollY = window.scrollY;
+
+			if (currentScrollY > lastScrollY && currentScrollY > 80) {
+				setShow(false);
+			} else {
+				setShow(true);
+			}
+
+			setLastScrollY(currentScrollY)
+		}
+
+		window.addEventListener("scroll", controlNavbar)
+		return () => window.removeEventListener("scroll", controlNavbar)
+	},[lastScrollY])
+	
 	return (
-		<div className="navbar bg-base-100 shadow-sm"> 
+		<div
+      className={`fixed top-0 left-0 w-full h-16 z-50 navbar bg-base-100 shadow-sm transition-transform duration-300 ${
+        show ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
 			<div className="navbar-start">
 				<Link className="btn btn-ghost text-base sm:text-base md:text-lg width-auto" href="/">
 					Mitchell Frisch

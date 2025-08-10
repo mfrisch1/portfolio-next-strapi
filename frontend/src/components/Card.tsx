@@ -21,6 +21,7 @@ const tagColors = [
   'bg-orange-500',
 ];
 
+// Set tag colours with hash
 function getColorClass(tagName: string): string {
   const hash = [...tagName].reduce((acc, char) => acc + char.charCodeAt(0), 0);
   return tagColors[hash % tagColors.length];
@@ -34,21 +35,24 @@ export default function Card({ title, coverURL, description, slug, tags, type }:
   : [tags];
 
 	return (
-		<Link href={`/${type}/${slug}`} className="card w-full shadow-sm m-4">
-			<figure className="w-full h-48 overflow-hidden">
+		<Link 
+			href={`/${type}/${slug}`} 
+			className="card flex image-full flex-col shadow-md rounded-lg bg-base-100 overflow-hidden min-h-[225px]"
+		>
+			<figure className="h-[225px] w-full overflow-hidden">
 				<Image 
-					width={400}
-					height={200}
+					width={300}
+					height={225}
 					src={`${coverURL}`} 
-					alt="Cover Image Here"
+					alt="Cover Image"
 					className="w-full h-full object-cover"
 				/>
 			</figure>
-			<div className="card-body">
+			<div className="card-body flex flex-col justify-between flex-grow">
 				<h2 className="card-title">
 					{title}
 				</h2>
-				<p>{description}</p>
+				<p className="line-clamp-3">{description}</p>
 				{/* TODO: Turn tags into filter search */}
 				<div className="card-actions justify-end">
 					{

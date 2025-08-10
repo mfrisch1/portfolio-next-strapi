@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ProfileModal from "@/components/Profile";
+import Footer from "@/components/Footer";
 
 import Providers from "@/app/providers";
 import NavBar from "@/components/NavBar";
@@ -33,7 +34,7 @@ export default function RootLayout({
       >
 				<Providers>
 					<NavBar />
-					<div className="mx-auto mt-5 w-full px-4 sm:px-6 lg:px-8 max-w-screen-lg" >
+					<div className="mx-auto mt-5 pt-10 w-full h-full px-4 sm:px-6 lg:px-8 max-w-screen-lg" >
 						{children}
 						<ProfileModal />
 					</div>
