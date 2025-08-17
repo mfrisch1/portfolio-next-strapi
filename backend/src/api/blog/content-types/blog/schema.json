@@ -42,6 +42,7 @@
         }
       },
       "multiple": false,
+      "required": true,
       "allowedTypes": [
         "images",
         "files"
@@ -56,6 +57,20 @@
       },
       "targetField": "title",
       "required": true
+    },
+    "description": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "mappedBy": "blogs"
     }
   }
 }

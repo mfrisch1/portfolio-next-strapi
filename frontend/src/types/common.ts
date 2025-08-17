@@ -7,7 +7,17 @@ export interface MetaAttrubutes {
   };
 }
 
-export interface StrapiListResponse<T> {
+export interface StrapiResponse<T> {
 	data: T[];
 	meta: MetaAttrubutes;
+}
+
+export interface StrapiSingleResponse<T> {
+	data: T;
+	meta: MetaAttrubutes;
+}
+
+export interface Tag {
+	id: number;
+	name: string;
 }
