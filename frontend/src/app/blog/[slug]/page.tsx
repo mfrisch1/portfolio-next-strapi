@@ -6,7 +6,8 @@ import { StrapiSingleResponse } from "@/types/common"
 import Image from "next/image";
 import { STRAPI_URL } from "@/lib/strapi";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
+import rehypeHighlight from "rehype-highlight";
+import "highlight.js/styles/github.css";
 
 type Props = {
 	params: { slug: string };
@@ -15,15 +16,14 @@ type Props = {
 export default async function BlogPost({ params }: Props) {
 	// Retreive docId from slug and search for the content
 	const docId = params.slug.split("-").pop();
-	if (docId === undefined) notFound();
+	if (!docId) notFound();
+
 	const data: StrapiSingleResponse<Blog> = await getBlogById(docId);
 	const blog: Blog = data.data
-
 	if (!blog) return notFound();
 
 	return (
-		<div className="mx-auto mt-15 pb-10 w-full px-4 sm:px-6 lg:px-8 max-w-screen-md">
-			{/* <div>{JSON.stringify(data)}</div> */}
+		<article className="mx-auto mt-15 pb-10 w-full px-4 sm:px-6 lg:px-8 max-w-screen-md">
 			<Image 
 					width={400}
 					height={200}
@@ -35,12 +35,15 @@ export default async function BlogPost({ params }: Props) {
 				{blog.title}
 			</h1>
 			<div className="divider"></div>
-			{/* TODO: Fix and assess rehypeRaw */}
-			<ReactMarkdown 
-				remarkPlugins={[remarkGfm]}
-				rehypePlugins={[rehypeRaw]}
-				children={blog.content}
-			/>
-		</div>
+			<div className="prose">
+				<ReactMarkdown 
+					remarkPlugins={[remarkGfm]}
+					rehypePlugins={[
+						[rehypeHighlight, { detect: true, ignoreMissing: true, preCodeBlock: true, useInlineStyles: false }]
+					]}
+					children={blog.content}
+				/>
+			</div>
+		</article>
 	)
 }

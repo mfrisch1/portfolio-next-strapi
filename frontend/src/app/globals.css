@@ -1,29 +1,29 @@
 @import "tailwindcss";
+
+/* Base: keep code blocks readable inside prose */
+.prose pre { padding: 1rem; border-radius: .5rem; overflow:auto; }
+.prose code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+/* Highlight.js token mapping to daisyUI variables */
+.hljs { background: transparent; color: var(--bc); }
+pre code.hljs { display:block; background: var(--b2); color: var(--bc); }
+.hljs-subst { color: var(--bc); }
+
+.hljs-comment, .hljs-quote      { color: color-mix(in oklab, var(--bc) 60%, transparent); font-style: italic; }
+.hljs-keyword, .hljs-selector-tag, .hljs-doctag { color: var(--p); font-weight: 600; }
+.hljs-title, .hljs-section, .hljs-selector-id, .hljs-selector-class { color: var(--s); }
+.hljs-string, .hljs-attr, .hljs-attribute      { color: var(--su); }
+.hljs-number, .hljs-literal                    { color: var(--a); }
+.hljs-built_in, .hljs-type, .hljs-class        { color: var(--in); }
+.hljs-name, .hljs-tag                          { color: var(--er); }
+.hljs-meta, .hljs-symbol, .hljs-bullet         { color: var(--wa); }
+.hljs-addition                                 { background: color-mix(in oklab, var(--su) 20%, transparent); }
+.hljs-deletion                                 { background: color-mix(in oklab, var(--er) 20%, transparent); }
+
+/* Borders that adapt to theme */
+.prose pre { border: 1px solid color-mix(in oklab, var(--bc) 12%, transparent); }
+
 @plugin "daisyui" {
 	themes: business --default --prefersdark, corporate;
 }
 
-/* :root { */
-/*   --background: #ffffff; */
-/*   --foreground: #171717; */
-/* } */
-/**/
-/* @theme inline { */
-/*   --color-background: var(--background); */
-/*   --color-foreground: var(--foreground); */
-/*   --font-sans: var(--font-geist-sans); */
-/*   --font-mono: var(--font-geist-mono); */
-/* } */
-/**/
-/* @media (prefers-color-scheme: dark) { */
-/*   :root { */
-/*     --background: #0a0a0a; */
-/*     --foreground: #ededed; */
-/*   } */
-/* } */
-/**/
-/* body { */
-/*   background: var(--background); */
-/*   color: var(--foreground); */
-/*   font-family: Arial, Helvetica, sans-serif; */
-/* } */

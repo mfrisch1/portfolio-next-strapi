@@ -1,7 +1,6 @@
 "use client"
 
 import Profile from "@/types/profile";
-import Link from "next/link";
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm";
 
@@ -17,7 +16,7 @@ export default function ProfileModal({profile}: Props) {
 				<div className="modal-box">
 					<ReactMarkdown 
 						remarkPlugins={[remarkGfm]}
-						// These props are here to address the issue of modal is breaking the markdown
+						// These props are here to address modal overriding the markdown css
 						components={{
 							h1: props => <h1 {...props} className="text-2xl font-bold mt-4 mb-2" />,
 							h2: props => <h2 {...props} className="text-xl font-semibold mt-3 mb-1" />,

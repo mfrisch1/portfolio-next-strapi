@@ -5,6 +5,7 @@ import Pagination from "@/components/Pagination"
 import { notFound } from "next/navigation"
 import { STRAPI_URL } from "@/lib/strapi"
 import { getProjects } from "@/lib/api/projects"
+import ""
 
 interface Props {
 	searchParams: { page?: string }

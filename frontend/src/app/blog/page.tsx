@@ -9,6 +9,7 @@ import { STRAPI_URL } from "@/lib/strapi"
 interface Props {
 	searchParams: { page?: string }
 }
+
 export default async function BlogList({searchParams}: Props) {
 	const page = parseInt(searchParams.page || "1", 10);
 	const pageSize=4;
@@ -43,4 +44,3 @@ export default async function BlogList({searchParams}: Props) {
 		</>
 	)
 }
-
